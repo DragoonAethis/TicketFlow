@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pl" data-bs-theme="light">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Zgłoś problem - {{ metadata.event_name }}</title>
+
+    <link href="{{ url_for('static', path='/style.css') }}" rel="stylesheet">
+    <link rel="icon" href="{{ url_for('static', path='/favicon.webp') }}">
+</head>
+<body class="bg-body-tertiary">
+<div class="container">
+  <main class="mb-2">
+    <div class="py-5 text-center">
+      <h3>{{ metadata.event_name }}</h3>
+      <h2>Zgłoś Problem</h2>
+      <p class="lead">{{ metadata.lead_html|safe }}</p>
+      {% if thank_you %}
+        <div class="alert alert-success" role="alert">Dziękujemy za wysłanie zgłoszenia!</div>
+      {% endif %}
+      {% if error %}
+        <div class="alert alert-danger" role="alert">Wystąpił problem przy wysyłaniu zgłoszenia!</div>
+      {% endif %}
+    </div>
+
+    <div class="row">
+      <div class="col-lg-6 col-12 offset-lg-3">
+        <form action="/" method="POST">
+          <div class="mb-3">
+            <label for="dept" class="form-label">Dział</label>
+            <select class="form-control" name="dept">
+              {% for dept in depts %}
+                <option value="{{ dept.name }}">{{ dept.description }}</option>
+              {% endfor %}
+            </select>
+            <div class="form-text">Do jakiego działu ma trafić to zgłoszenie?</div>
+          </div>
+          <div class="mb-3">
+            <label for="who" class="form-label">Kim jesteś? (wymagane)</label>
+            <input type="text" class="form-control" id="who" name="who" required>
+            <div class="form-text">Nick lub nazwisko osoby wysyłającej zgłoszenie. <b>Jeżeli jesteś spoza obsługi wydarzenia, dodaj numer telefonu lub inny sposób na skontaktowanie się z tobą.</b></div>
+          </div>
+          <div class="mb-3">
+            <label for="where" class="form-label">Gdzie jest problem? (wymagane)</label>
+            <input type="text" class="form-control" id="where" name="where" required>
+            <div class="form-text">Przykładowo: Jaka strefa, sala, hala, dokładne miejsce...</div>
+          </div>
+          <div class="mb-3">
+            <label for="what" class="form-label">Co do zrobienia? (wymagane)</label>
+            <input type="text" class="form-control" id="what" name="what" required>
+            <div class="form-text"><b>Krótko</b> co trzeba zrobić, co się stało, ...</div>
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label">Opis</label>
+            <textarea class="form-control" id="description" name="description" style="min-height: 80px"></textarea>
+            <div class="form-text">Dłuższy opis jeżeli potrzeba</div>
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Wyślij zgłoszenie</button>
+        </form>
+        <hr>
+        <div class="mt-2 mb-2 text-center">
+          <span class="text-muted small">
+            Kod źródłowy: <a href="https://github.com/DragoonAethis/TicketFlow" target="_blank">TicketFlow</a>
+            &middot;
+            Dla obsługi: <a href="https://github.com/orgs/{{ metadata.org_name }}/projects/{{ metadata.project_number }}" target="_blank">Tablica Zadań</a>
+          </span><br>
+          <img src="{{ url_for('static', path='/favicon.webp') }}" width="64" height="64">
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+</body>
+</html>

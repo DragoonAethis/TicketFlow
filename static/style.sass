@@ -1,0 +1,30 @@
+// Grab the Bootstrap source files from https://getbootstrap.com/ and using Dart Sass:
+// sass custom-bs.sass --style=compressed > style.css
+@import "scss/mixins/banner";
+@include bsBanner("");
+
+
+// scss-docs-start import-stack
+// Configuration
+@import "scss/functions";
+@import "scss/variables";
+@import "scss/maps";
+@import "scss/mixins";
+@import "scss/utilities";
+
+// Layout & components
+@import "scss/root";
+@import "scss/reboot";
+@import "scss/type";
+@import "scss/containers";
+@import "scss/grid";
+@import "scss/forms";
+@import "scss/buttons";
+@import "scss/alert";
+
+// Helpers
+@import "scss/helpers";
+
+// Utilities
+@import "scss/utilities/api";
+// scss-docs-end import-stack

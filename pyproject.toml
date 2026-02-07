@@ -1,0 +1,13 @@
+[project]
+name = "ticketflow"
+version = "0.1.0"
+description = "GitHub Projects is like Trello if you squint hard enough"
+requires-python = ">=3.14"
+dependencies = [
+    "fastapi[standard]>=0.128.3",
+    "uvicorn>=0.40.0",
+    "jinja2>=3.1.6",
+    "gql[httpx]>=3.5.3,<4.0.0",
+    "pydantic-settings>=2.12.0",
+    "python-multipart>=0.0.22",
+]

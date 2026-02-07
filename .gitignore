@@ -1,0 +1,7 @@
+.git
+.venv
+.idea
+.ruff_cache
+__pycache__
+static/scss
+.env
