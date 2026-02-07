@@ -7,6 +7,7 @@ Kod jest straszny i ledwo działa, ale działa. Ktoś kiedyś powinien to przepi
 
 Ale dziś to nie jest ten dzień.
 
+
 ## Jak to wygląda
 
 ![Formularz](docs/formularz.png)
@@ -14,6 +15,7 @@ Ale dziś to nie jest ten dzień.
 ![Tablica](docs/tablica.png)
 
 ![Issue](docs/issue.png)
+
 
 ## Jak to złożyć
 
@@ -25,6 +27,7 @@ Ale dziś to nie jest ten dzień.
 - Utwórz w tej organizacji projekt - to jest tablica ticketów
   - Jak wyżej, projekt również powinien być prywatny!
   - Po utworzeniu i otwarciu tablicy spisz z URLa numer projektu
+  - W ustawieniach projektu ustaw powyższe repo jako domyślne miejsce tworzenia issuesów
   - Przykładowo: `Festiwal Remcon 2026` o numerze 3
 - W ustawieniach projektu dodaj custom fieldy:
   - Nazwy pól **MAJĄ ZNACZENIE** - zmodyfikuj kod formularza jeśli chcesz nazwać je inaczej.
@@ -36,12 +39,12 @@ Ale dziś to nie jest ten dzień.
     - Kolejność działów w tym menu odpowiada kolejności w formularzu
     - Pierwsza opcja na tej liście będzie domyślną w formularzu
   - `Kto`, `Gdzie`, `Kiedy`: pola tekstowe.
-  - `Status`: skonfiguruj tak jak chcesz. Na Remconie mamy je złożone tak:
-  - `Nowe`: Rzecz przyszła ze świata, trzeba coś z nią zrobić, człowiek jeszcze nie widział.
-  - `Do zrobienia`: Trzeba coś z rzeczą zrobić, człowiek już widział i zaackował.
-  - `Robi się`: Robi się właśnie.
-  - `Zrobione`: Już się nie robi.
-  - `Śmietnik`: Już się nie zrobi.
+    - `Status`: skonfiguruj tak jak chcesz. Na Remconie mamy je złożone tak:
+    - `Nowe`: Rzecz przyszła ze świata, trzeba coś z nią zrobić, człowiek jeszcze nie widział.
+    - `Do zrobienia`: Trzeba coś z rzeczą zrobić, człowiek już widział i zaackował.
+    - `Robi się`: Robi się właśnie.
+    - `Zrobione`: Już się nie robi.
+    - `Śmietnik`: Już się nie zrobi.
   - Kolory/opisy nie mają znaczenia dla formularza.
 - Utwórz konto serwisowe do ładowania ticketów przez formularz.
   - Możesz użyć swojego prywatnego, ale dostaniesz kilkaset maili przez całe wydarzenie.
@@ -58,6 +61,7 @@ Ale dziś to nie jest ten dzień.
   - Jeżeli zmienisz działy itp i chcesz aby formularz odwzorował te zmiany, zrestartuj aplikację.
   - Jak nic się nie pojawiło, przejrzyj logi czy coś poszło nie tak.
     - Użytkownik zwykle nie dostanie błędu na twarz - issuesy są tworzone jako zadanie w tle.
+
 
 ## Jak to odpalić (sam Docker/Podman)
 
@@ -82,6 +86,22 @@ To wsio. Notatki:
   - Postaw przed nią Caddy (łatwo) albo nginxa (trudniej) do serwowania HTTPSa.
   - Aplikacja ma domyślnie włączone `--proxy-headers` więc wystawianie jej bezpośrednio to słaby pomysł.
 - Możesz podmontować inny `/app/static/favicon.webp` aby zmienić obrazek w stopce/faviconce.
+- "Produkcyjnie" odpalamy to z Docker Compose'a + Caddy na froncie.
+  - Cały config Caddy do HTTPSa itp: `domena.example.com { encode gzip; reverse_proxy ticketflow:8080; }`
+  - Tak, serio, to dosłownie wszystko, **o ile domena poprawnie wskazuje na daną maszynkę i Caddy słucha na portach 80/443**.
+
+
+## Jak nadać uprawnienia
+
+- Użytkownik od strony formularza nie widzi żadnych szczegółów.
+- Użytkownik od strony obsługi musi mieć konto na GitHubie.
+- Nadaj wybranemu użytkownikowi uprawnienia minimum **Triage** na repozytorium.
+  - Dodajesz to w Settings -> Collaborators and Teams
+  - Jeżeli użytkownik jest spoza organizacji, musi kliknąć w link który otrzyma mailowo.
+- Gdy użytkownik dołączy już do repozytorium, dodaj go do projektu z uprawnieniami **Write**
+  - Dodajesz to w Settings -> Manage access
+  - Jeżeli użytkownik nie został dodany do repo, nie pojawi się pod Invite collaborators
+
 
 ## Jak to zalicencjonować
 
