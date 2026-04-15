@@ -9,5 +9,5 @@ dependencies = [
     "jinja2>=3.1.6",
     "gql[httpx]>=3.5.3,<4.0.0",
     "pydantic-settings>=2.12.0",
-    "python-multipart>=0.0.22",
+    "python-multipart>=0.0.26",
 ]
